@@ -1,0 +1,10 @@
+{
+  "name": "base-js-tools",
+  "version": "0.0.1",
+  "description": "base handy tools to build js applications",
+  "main": "index.js",
+  "repository": "https://github.com/ThornOfVenice/base-js-tools.git",
+  "author": "ThornOfVenice",
+  "license": "MIT",
+  "private": null
+}
