@@ -1,3 +1,6 @@
+//saving here for testing: compiler option tsc src/*.ts --declaration --emitDeclarationOnly --downlevelIteration
+//yarn build does it correctly anyway
+
 export class SetOps {
 
   static union<T>(setA: Set<T>, setB: Set<T>) {
