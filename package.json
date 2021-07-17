@@ -1,10 +1,10 @@
 {
   "name": "@thornveneto/base-js-tools",
-  "version": "0.0.3",
-  "description": "base handy tools to build js applications",
+  "version": "0.0.4",
+  "description": "Very basic handy tools to build js applications",
   "main": "index.js",
-  "repository": "https://github.com/ThornOfVenice/base-js-tools.git",
-  "author": "ThornOfVenice",
+  "repository": "https://github.com/thornveneto/base-js-tools.git",
+  "author": "thornveneto",
   "license": "MIT",
   "private": null,
   "devDependencies": {
