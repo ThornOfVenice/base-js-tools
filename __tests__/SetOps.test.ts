@@ -1,4 +1,4 @@
-import { SetOps } from "./SetOps"
+import { SetOps } from "../src/SetOps";
 
 describe("Testing SetOps.union operation", () => {
   test("test basic set union", () => {

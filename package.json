@@ -1,6 +1,6 @@
 {
   "name": "@thornveneto/base-js-tools",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "Very basic handy tools to build js applications",
   "main": "dist/base-js-tools.js",
   "module": "dist/base-js-tools.esm.js",
