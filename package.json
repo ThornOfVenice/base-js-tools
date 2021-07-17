@@ -1,8 +1,9 @@
 {
   "name": "@thornveneto/base-js-tools",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Very basic handy tools to build js applications",
-  "main": "index.js",
+  "main": "dist/base-js-tools.js",
+  "module": "dist/base-js-tools.esm.js",
   "repository": "https://github.com/thornveneto/base-js-tools.git",
   "author": "thornveneto",
   "license": "MIT",

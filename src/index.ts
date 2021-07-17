@@ -1,3 +1,1 @@
-export function test(width: number, height: number) {
-  return width * height;
-}
+export { SetOps } from "./SetOps";

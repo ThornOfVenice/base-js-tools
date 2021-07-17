@@ -16,7 +16,11 @@ module.exports = {
     extensions: ['.ts', '.js']
   },
   output: {
-    filename: 'main.js',
+    filename: 'base-js-tools.js',
     path: path.resolve(__dirname, 'dist'),
+    library: {
+      name: "baseJsTools",
+      type: "umd",
+    }
   },
 };
