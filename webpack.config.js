@@ -21,6 +21,7 @@ module.exports = {
     library: {
       name: "baseJsTools",
       type: "umd",
-    }
+    },
+    globalObject: 'this' // Seet https://webpack.js.org/configuration/output/#outputglobalobject
   },
 };
