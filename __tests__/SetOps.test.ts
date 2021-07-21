@@ -21,3 +21,12 @@ describe("Testing SetOps.sameSets operation", () => {
     expect(SetOps.sameSets(new Set(['c','b', 'a']), new Set(['c', 'b', 'e']))).toBe(false);
   });
 });
+
+describe("Testing SetOps.filter operation", () => {
+  test("test basic set filter", () => {
+
+    let inputSet = new Set(["test", "testo", "flour"]);
+
+    expect(SetOps.filter(inputSet, (keyValue: string) => keyValue.indexOf("test") >= 0)).toEqual(new Set(["test", "testo"]));
+  });
+});

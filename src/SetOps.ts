@@ -9,7 +9,7 @@ export class SetOps {
         _union.add(elem);
     }
     return _union;
-}
+  }
 
   static diff<T>(setA: Set<T>, setB: Set<T>) {
     let _difference = new Set(setA);
@@ -31,4 +31,11 @@ export class SetOps {
 
     return true;
   }
+
+  static filter<T>(
+    inputSet: Set<T>, 
+    filterFunction: (keyValue: T) => boolean
+    ) {
+      return new Set(Array.from(inputSet).filter(filterFunction));
+    }
 }
