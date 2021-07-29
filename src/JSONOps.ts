@@ -3,7 +3,7 @@ export class JSONOps {
   private static _refToPropertyValue (
     containerData: Record<string, any>,
     keyPath: Array<string | number>
-  ) {
+  ): any  {
     let runningPropertyPointer = containerData;
 
     keyPath.forEach(keyItem => {
@@ -12,6 +12,13 @@ export class JSONOps {
     });
 
     return runningPropertyPointer;
+  }
+
+  static pathArrayFromString(pathValue: string) {
+    // TODO: add more complex scenarios like array index[] if ever required
+    const result = pathValue.split('.');
+
+    return result;
   }
 
   static getPropertyValue (

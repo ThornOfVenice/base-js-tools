@@ -1,6 +1,6 @@
 {
   "name": "@thornveneto/base-js-tools",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "Very basic handy tools to build js applications",
   "main": "./dist/base-js-tools.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +12,8 @@
   "scripts": {
     "compile": "tsc src/*.ts --declaration --emitDeclarationOnly --downlevelIteration --declarationDir types",
     "build": "yarn compile && webpack",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "yarn publish"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
