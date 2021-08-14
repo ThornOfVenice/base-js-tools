@@ -1,13 +1,13 @@
 import { ConvOps } from "../src/ConvOps";
 
 describe("testing basic ConvOps", () => {
-  test("testing very basic extraction", () => {
-    let inputArray = [
+  test("array to Records, no conversion", () => {
+    const inputArray = [
       {"k": "A", "a": "x", "b": "y"},
       {"k": "B", "a": "w", "b": "z"},
     ];
 
-    let resultRecord = {
+    const resultRecord = {
       "A": {"k": "A", "a": "x", "b": "y"},
       "B":  {"k": "B", "a": "w", "b": "z"},
     }
@@ -15,6 +15,47 @@ describe("testing basic ConvOps", () => {
     expect(ConvOps.arrayToRecord(inputArray, "k")).toEqual(resultRecord);
   });
 
+  test("array to Records, with conversion", () => {
+    const inputArray = [
+      {"k": "A", "a": "x", "b": "y"},
+      {"k": "B", "a": "w", "b": "z"},
+    ];
+
+    const transformationRules = [
+      {s: "k", DEL: true},
+      {s: "a", f: (inp: string) => `-${inp}`}
+    ]
+
+    const resultRecord = {
+      "A": {"a": "-x", "b": "y"},
+      "B":  {"a": "-w", "b": "z"},
+    }
+
+    expect(ConvOps.arrayToRecord(inputArray,"k", transformationRules)).toEqual(resultRecord);
+  });  
+
+  test("testing records to records", () => {
+    const inputRecords = {
+      "A": {a: "one/two", b: 10},
+      "B": {a: "three/four", b: 20}
+    }
+
+    const transformationRule = [
+      {s: "a", f: (inp: string) => { return inp.split("/")[1]; }, t: "x", DEL: true},
+      {s: "b", f: (inp: number) => { return inp * 2; }, t: "y", DEL: true},
+    ];    
+
+    const expectedOutput = {
+      "A": {x: "two", y: 20},
+      "B": {x: "four", y: 40}    
+    }
+
+    expect(ConvOps.recordsToRecords(inputRecords, transformationRule)).toEqual(expectedOutput);
+  });
+
+});
+
+describe("Record Conversions", () => {
   test("converting single scalar record in place", () => {
     const inputRecord = {
       "a": "test/value",

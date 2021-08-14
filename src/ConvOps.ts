@@ -1,27 +1,22 @@
 import { JSONOps } from "./JSONOps";
 import produce from "immer"; //TODO: are we exporting this module too?
 
+export interface TransformationRule {
+  s?: string; 
+  f?: (inp: any) => any; 
+  DEL?: boolean; 
+  t?: string; 
+  c?: any;
+}
+
+export type TransformationRules = Array<TransformationRule>;
+
 export class ConvOps {
-  static arrayToRecord<T>(inputArray: Array<T>, keyPath: string) {
-    // TODO: support more complex key path
-    // TODO: support shallow or not shallow copy
-
-    const resultRecord: Record<string, T> = {};
-    const keyArray = JSONOps.pathArrayFromString(keyPath);
-
-    inputArray.forEach((arrayItem: T) => {
-      const keyValue = JSONOps.getPropertyValue(arrayItem, keyArray);
-      
-      resultRecord[keyValue] = arrayItem;
-    });
-
-    return resultRecord;
-  }
 
   static transformRecord(
     inputRecord: Record<string, any>,
     //TODO: typefy properly
-    transformationRules: Array<{s?: string; f?: (inp: any) => any; DEL?: boolean; t?: string; c?: any; }>
+    transformationRules: TransformationRules
     ) {
 
     const result = produce(inputRecord, draftState => {      
@@ -49,6 +44,41 @@ export class ConvOps {
       });
 
     }); 
+
+    return result;
+  }
+
+  static arrayToRecord<I, O>(inputArray: Array<I>, keyPath: string, transformationRules?: TransformationRules) {
+    // TODO: support more complex key path
+    // TODO: support shallow or not shallow copy
+
+    const resultRecord: Record<string, O> = {};
+    const keyArray = JSONOps.pathArrayFromString(keyPath);
+    
+    inputArray.forEach((arrayItem: I) => {
+      const keyValue = JSONOps.getPropertyValue(arrayItem, keyArray);
+      
+      if (transformationRules) {
+        resultRecord[keyValue] = ConvOps.transformRecord(arrayItem, transformationRules) as O;
+      } else {
+        resultRecord[keyValue] = produce(arrayItem, draftState => {}) as unknown as O;
+      }
+      
+    });
+
+    return resultRecord;
+  }
+
+  static recordsToRecords<T>(
+    inputRecords: Record<string, Record<string, any>>,
+    transformationRules: TransformationRules
+    ) {
+
+    const result: Record<string, any> = {};
+
+    Object.keys(inputRecords).forEach(itemKey => {
+      result[itemKey] = ConvOps.transformRecord(inputRecords[itemKey], transformationRules) as T;
+    });
 
     return result;
   }
