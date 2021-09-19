@@ -1,5 +1,20 @@
 import { JSONOps } from "../src/JSONOps";
 
+describe("test path conversion", () => {
+  test("test basic path conversion", () => {
+    let testInput = "a.b.c";
+    let testOutput = ["a", "b", "c"];
+
+    expect(JSONOps.pathArrayFromString(testInput)).toEqual(testOutput);
+  });
+  test("test path conversion with array", () => {
+    let testInput = "a.b.[7]";
+    let testOutput = ["a", "b", 7];
+
+    expect(JSONOps.pathArrayFromString(testInput)).toEqual(testOutput);
+  });  
+});
+
 describe("Testing basic JSONOps read operations", () => {
 
   test("scalar value", () => {

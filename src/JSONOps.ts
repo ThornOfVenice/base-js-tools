@@ -15,8 +15,20 @@ export class JSONOps {
   }
 
   static pathArrayFromString(pathValue: string) {
-    // TODO: add more complex scenarios like array index[] if ever required
-    const result = pathValue.split('.');
+    //TODO: add documentation to say how array is converted
+    const result: Array<string | number> = pathValue.split('.');
+
+    for (let i = 0; i < result.length; i++) {
+      let resultToken = result[i] as string;
+
+      if (resultToken.charAt(0) === "[") {
+        if (resultToken.charAt(resultToken.length - 1) !== "]") {
+          throw new Error("JSONOps::pathArrayFromString -> malformed array item");
+        }
+
+        result[i] = parseInt(resultToken.slice(1, resultToken.length - 1), 10);
+      }
+    }
 
     return result;
   }
