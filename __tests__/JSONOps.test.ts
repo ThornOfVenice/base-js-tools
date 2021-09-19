@@ -107,6 +107,33 @@ describe("testing basic patch operations", () => {
       }
     });
   });  
+
+  test("add array property when it does not exist and patch value. Array defined as integer", () => {
+    // TODO: add test for non-integer value
+    // TODO: add test for index other than 0 - expect Error
+    let testInput = {
+      "a": {
+        "b": {
+          "c": 5
+        }
+      }
+    }
+    let testOutput = {
+      "a": {
+        "b": {
+          "c": 5,
+          "d": [15] /*NEW*/
+        }
+      }
+    }
+    expect(
+      JSONOps.patchPropertyValue(
+        testInput,
+        ["a", "b", "d", 0],
+        15
+      )
+    ).toEqual(testOutput);    
+  });
 });
 
 describe("testing basic delete operations", () => {
