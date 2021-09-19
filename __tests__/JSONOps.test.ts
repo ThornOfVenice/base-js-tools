@@ -164,7 +164,7 @@ describe("testing basic delete operations", () => {
     }
 
     expect(
-      JSONOps.deletePropertyValue(
+      JSONOps.deleteProperty(
         testJSON,
         ["a", "b", "c"]
       )
@@ -175,6 +175,24 @@ describe("testing basic delete operations", () => {
         }
       }
     });
+  });
+
+  test("delete array item", () => {
+    let testInput = {
+      a: {
+        b: [
+          0, 1, 2
+        ]
+      }
+    }
+    let testOutput = {
+      a: {
+        b: [
+          0, 2
+        ]
+      }
+    }
+    expect(JSONOps.deleteProperty(testInput, ["a", "b", 1])).toEqual(testOutput);
   });
 
 });

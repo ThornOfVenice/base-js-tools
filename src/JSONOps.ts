@@ -68,7 +68,7 @@ export class JSONOps {
     return containerData;
   }
 
-  static deletePropertyValue (
+  static deleteProperty (
     containerData: Record<string, any>,
     keyPath: Array<string | number>
   ) {
@@ -76,12 +76,18 @@ export class JSONOps {
     let refToParentValue = JSONOps._refToPropertyValue(containerData, keyPath.slice(0, keyPath.length - 1));
 
     const lastKeyToken = keyPath[keyPath.length - 1];
-    if (Array.isArray(refToParentValue[lastKeyToken])) {
-      throw new Error("JSONOps::deletePropertyValue - array item deletion is not supported yet");
+    if (Array.isArray(refToParentValue)) {
+      if (typeof lastKeyToken === "number") {
+        refToParentValue.splice(lastKeyToken, 1);
+      } else {
+        throw new Error("JSONOps::deleteProperty -> lastKey token is not numeric");
+      }
+      
     } else {
       delete refToParentValue[lastKeyToken];
     }
 
     return containerData;
-  }  
+  }
+
 }

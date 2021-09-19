@@ -40,7 +40,7 @@ export class ConvOps {
 
           // delete draftState[item.s];
           const sourcePath = JSONOps.pathArrayFromString(item.s);
-          JSONOps.deletePropertyValue(draftState, sourcePath);
+          JSONOps.deleteProperty(draftState, sourcePath);
       });
 
     }); 
