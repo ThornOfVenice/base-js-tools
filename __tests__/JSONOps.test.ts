@@ -196,3 +196,62 @@ describe("testing basic delete operations", () => {
   });
 
 });
+
+describe("Basic Safety test for combined modifyProperty operation", () => {
+  test("Test modify property", () => {
+    let testJSON = {
+      "a": {
+        "b": [
+          5, 7, 9
+        ]
+      }
+    }
+
+    expect(
+      JSONOps.modifyProperty(
+        testJSON,
+        "a.b.[2]",
+        "modify",
+        15
+      )
+    ).toEqual({
+      "a": {
+        "b": [
+          5, 7, 15
+        ]
+      }
+    });
+  });
+
+  test("Test delete property", () => {
+
+    let testJSON = {
+      "a": {
+        "b": {
+          "c": 5,
+          "d": "AA"
+        }
+      }
+    }
+
+    expect(
+      JSONOps.modifyProperty(
+        testJSON,
+        "a.b.c",
+        "delete"
+      )
+    ).toEqual({
+      "a": {
+        "b": {
+          "d": "AA"
+        }
+      }
+    });
+  });
+
+  test("Invalid descriptor", () => {
+    let testJSON = {}
+    //@ts-expect-error
+    expect(() => {JSONOps.modifyProperty(testJSON, "a.b.c", "illegal")}).toThrowError(/actionDescriptor/);
+  });
+});

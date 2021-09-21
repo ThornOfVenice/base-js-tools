@@ -90,4 +90,23 @@ export class JSONOps {
     return containerData;
   }
 
+  static modifyProperty (
+    containerData: Record<string, any>,
+    keyPathString: string,
+    actionDescriptor: "delete" | "modify",
+    value?: any
+  ) {
+
+    const keyPathArray = JSONOps.pathArrayFromString(keyPathString);
+
+    if (actionDescriptor === "modify") {
+      return JSONOps.patchPropertyValue(containerData, keyPathArray, value);
+    } else if (actionDescriptor === "delete") {
+      return JSONOps.deleteProperty(containerData, keyPathArray);
+    } else {
+      throw new Error("JSONOps::modifyProperty -> Invalid actionDescriptor. Only delete & modify are allowed");
+    }
+
+  }
+
 }
