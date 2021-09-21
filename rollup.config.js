@@ -7,8 +7,12 @@ export default [
     output: {
       file: 'dist/base-js-tools.js',
       format: 'umd',
-      name: "baseJsTools"
+      name: "baseJsTools",
+      globals: {
+        immer: "produce"
+      }
     },
-    plugins: [typescript()]
+    plugins: [typescript()],
+    external: ["immer"],
   }
 ]
