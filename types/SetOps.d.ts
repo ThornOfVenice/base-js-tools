@@ -4,3 +4,4 @@ export declare class SetOps {
     static sameSets<T>(setA: Set<T>, setB: Set<T>): boolean;
     static filter<T>(inputSet: Set<T>, filterFunction: (keyValue: T) => boolean): Set<T>;
 }
+//# sourceMappingURL=SetOps.d.ts.map

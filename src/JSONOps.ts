@@ -14,9 +14,31 @@ export class JSONOps {
     return runningPropertyPointer;
   }
 
+  static pathStringSplit(pathString: string) {
+    const result = [];
+    let j = 0;
+
+    for (let i = 0; i < pathString.length; i++) {
+      if (i === pathString.length - 1) {
+        result.push(pathString.slice(j));
+      } else {
+        if (pathString.charAt(i) === ".") {
+          result.push(pathString.slice(j, i));
+          j = i + 1;
+        } else if (pathString.charAt(i) === "[" && pathString.charAt(i-1) !== ".") {
+          result.push(pathString.slice(j, i));
+          j = i;
+        }
+      }
+    }
+
+    return result;
+  }
+
   static pathArrayFromString(pathValue: string) {
     //TODO: add documentation to say how array is converted
-    const result: Array<string | number> = pathValue.split('.');
+    const result: Array<string | number> = JSONOps.pathStringSplit(pathValue);
+
 
     for (let i = 0; i < result.length; i++) {
       let resultToken = result[i] as string;

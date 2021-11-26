@@ -13,6 +13,12 @@ describe("test path conversion", () => {
 
     expect(JSONOps.pathArrayFromString(testInput)).toEqual(testOutput);
   });  
+  test("test path conversion array, syntaxb", () => {
+    let testInput = "a.b[7]";
+    let testOutput = ["a", "b", 7];
+
+    expect(JSONOps.pathArrayFromString(testInput)).toEqual(testOutput);
+  });
 });
 
 describe("Testing basic JSONOps read operations", () => {

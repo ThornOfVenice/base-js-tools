@@ -4,15 +4,13 @@
 
 ```ts
 
-// @public (undocumented)
+// @beta
 export class ConvOps {
-    // (undocumented)
     static arrayToRecord<I, O>(inputArray: Array<I>, keyPath: string, transformationRules?: TransformationRules): Record<string, O>;
-    // (undocumented)
+    // Warning: (ae-forgotten-export) The symbol "TransformationRule" needs to be exported by the entry point index.d.ts
+    static assertRuleIsCorrect(rule: TransformationRule): void;
     static recordsToRecords<T>(inputRecords: Record<string, Record<string, any>>, transformationRules: TransformationRules): Record<string, any>;
     // Warning: (ae-forgotten-export) The symbol "TransformationRules" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
     static transformRecord(inputRecord: Record<string, any>, transformationRules: TransformationRules): Record<string, any>;
 }
 
@@ -28,6 +26,8 @@ export class JSONOps {
     static patchPropertyValue(containerData: Record<string, any>, keyPath: Array<string | number>, value: any): Record<string, any>;
     // (undocumented)
     static pathArrayFromString(pathValue: string): (string | number)[];
+    // (undocumented)
+    static pathStringSplit(pathString: string): string[];
 }
 
 // @public (undocumented)

@@ -1,6 +1,6 @@
 {
   "name": "@thornveneto/base-js-tools",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Very basic handy tools to build js applications",
   "main": "./dist/base-js-tools.js",
   "typings": "./dist/base-js-tools.d.ts",
